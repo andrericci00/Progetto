@@ -3,4 +3,4 @@ project(Laboratorio)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(Laboratorio main.cpp Transaction.cpp Transaction.h)
+add_executable(Laboratorio main.cpp Transaction.cpp Transaction.h Transaction_in.cpp Transaction_in.h)
