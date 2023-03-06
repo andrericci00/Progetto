@@ -4,7 +4,7 @@
 
 #include "Transaction.h"
 #include <iostream>
-Transaction::Transaction(): m_money() , m_description() {}
+Transaction::Transaction(): m_money(0) , m_description("") {}
 Transaction::Transaction(float importo, const string& description) : m_money(importo), m_description(description) {}
 
 float Transaction::getImporto() const {
