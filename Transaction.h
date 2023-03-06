@@ -14,6 +14,9 @@ public:
     Transaction(float importo, const string& description);
 
     float getImporto() const;
+    string getDescription() const;
+    virtual string getType() const = 0;
+
 
 };
 
