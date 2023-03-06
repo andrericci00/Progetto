@@ -3,3 +3,5 @@
 //
 
 #include "Transaction.h"
+#include <iostream>
+Transaction::Transaction(): m_money() , m_description() {}
