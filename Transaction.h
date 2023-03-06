@@ -11,9 +11,9 @@ using namespace std;
 class Transaction {
 public:
     Transaction();
-    Transaction(float importo, const string& description);
+    Transaction(float amount, const string& description);
 
-    float getImporto() const;
+    float getAmount() const;
     string getDescription() const;
     virtual string getType() const = 0;
     void print() const;

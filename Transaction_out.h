@@ -11,7 +11,7 @@
 class Transaction_out : public Transaction {
 public:
     Transaction_out();
-    Transaction_out(float importo, const string& description);
+    Transaction_out(float amount, const string& description);
 
     virtual string getType() const;
 
