@@ -1,4 +1,10 @@
 using namespace std;
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include "Transaction.h"
+#include "Transaction_in.h"
+#include "Transaction_out.h"
 
-// Classi che rappresentano transazioni finanziarie su un conto corrente (ingresso e uscita).
-// Le classi devono essere in gradi leggere e salvare i dati su file.
+//esempio utilizzo classi
+int main() {}
