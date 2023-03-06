@@ -14,3 +14,7 @@ float Transaction::getImporto() const {
 string Transaction::getDescription() const {
     return m_description;
 }
+
+void Transaction::print() const {
+    cout << getType() << "di" << m_money << "euro(" << m_description << ")" << endl;
+}
