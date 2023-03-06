@@ -13,10 +13,10 @@ public:
     Transaction_out();
     Transaction_out(float amount, const string& description);
 
-    virtual string getType() const;
+    virtual string getType() const override;
 
-    virtual void save(ofstream& file) const ;
-    virtual void load(ifstream& file);
+    virtual void save(ofstream& file) const override;
+    virtual void load(ifstream& file) override;
 };
 
 #endif //LABORATORIO_TRANSACTION_OUT_H
