@@ -10,7 +10,7 @@ string Transaction_in::getType() const {
 }
 
 void Transaction_in::save(ofstream &file) const {
-    file << getType << endl;
+    file << getType() << endl;
     file <<m_money<< endl;
     file << m_description << endl;
 }
