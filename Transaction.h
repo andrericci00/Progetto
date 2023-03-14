@@ -20,7 +20,6 @@ public:
     virtual void save(ofstream& file) const = 0;
     virtual void load(ifstream& file) = 0;
 
-protected:
     float m_money;
     string m_description;
 
