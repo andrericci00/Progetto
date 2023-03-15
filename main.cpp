@@ -88,8 +88,14 @@ int main() {
                 int index;
                 cout << "Indice della transazione da eliminare: ";
                 cin >> index;
-                if (index >= 0 && index < transazioni.size())
+                if (index >= 0 && index < transazioni.size()) {
                     Transaction *t = transazioni[index];
+                    transazioni.erase(transazioni.begin() + index);
+                    delete t;
+                    cout << "Transazione eliminata" << endl;
+                } else {
+                    cout << "Indice non valido" << endl;
+                }
                 break;
             }
             case 4:
@@ -100,11 +106,31 @@ int main() {
                               << std::endl;
                 }
                 break;
-
-
-                return 0;
+            case 0:
+                std::cout << "Uscita dal programma" << std::endl;
+                break;
+            default:
+                std::cout << "Scelta non valida" << std::endl;
+                break;
         }
     } while (scelta != 0);
 
+// Salva le transazioni sul file di output
+    ofstream outFile("transazioni_output.txt");
+    if (outFile.is_open()) {
+        for (auto &t: transazioni) {
+            t->save(outFile);
+            outFile << std::endl;
+        }
+        outFile.close();
+    } else {
+        std::cerr << "Errore durante l'apertura del file di output" << std::endl;
+        return 1;
+    }
 
+// Deallocazione della memoria
+    for (auto &t: transazioni) {
+        delete t;
+    }
+    return 0;
 }
