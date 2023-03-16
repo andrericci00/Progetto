@@ -17,6 +17,8 @@ public:
 
     virtual void save(ofstream& file) const override;
     virtual void load(ifstream& file) override;
+
+    float m_money;
 };
 
 #endif //LABORATORIO_TRANSACTION_OUT_H

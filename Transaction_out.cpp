@@ -4,7 +4,7 @@
 
 #include "Transaction_out.h"
 Transaction_out::Transaction_out() : Transaction(){}
-Transaction_out::Transaction_out(float amount, const string &description) : Transaction(){}
+Transaction_out::Transaction_out(float amount, const string &description) : Transaction(amount, description), m_money(amount){}
 string Transaction_out::getType() const {
     return "Uscita";
 }
