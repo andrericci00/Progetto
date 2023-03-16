@@ -9,7 +9,7 @@ using namespace std;
 //esempio utilizzo classi
 int main() {
     std::vector<Transaction *> transactions;
-    ifstream file("transactions.txt");
+    ifstream file("transazioni.txt");
     if (file.is_open()) {
         while (!file.eof()) {
             string type;
