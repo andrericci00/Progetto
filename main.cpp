@@ -8,20 +8,20 @@ using namespace std;
 
 //esempio utilizzo classi
 int main() {
-    std::vector<Transaction *> transazioni;
+    std::vector<Transaction *> transactions;
     ifstream file("transazioni.txt");
     if (file.is_open()) {
         while (!file.eof()) {
-            string tipo;
-            getline(file, tipo);
-            if (tipo == "Entrata") {
+            string type;
+            getline(file, type);
+            if (type == "Entrata") {
                 Transaction_in *t = new Transaction_in();
                 t->load(file);
-                transazioni.push_back(t);
-            } else if (tipo == "Uscita") {
+                transactions.push_back(t);
+            } else if (type == "Uscita") {
                 Transaction_out *t = new Transaction_out();
                 t->load(file);
-                transazioni.push_back(t);
+                transactions.push_back(t);
             }
         }
         file.close();
@@ -42,22 +42,22 @@ int main() {
 
         switch (scelta) {
             case 1: {
-                string tipo;
+                string type;
                 cout << "Tipo di transazione (Entrata/Uscita): ";
-                cin >> tipo;
-                float importo;
+                cin >> type;
+                float amount;
                 cout << "Importo: ";
-                cin >> importo;
-                string descrizione;
+                cin >> amount;
+                string description;
                 cout << "Descrizione: ";
                 cin.ignore();
-                getline(cin, descrizione);
-                if (tipo == "Entrata") {
-                    Transaction_in *t = new Transaction_in(importo, descrizione);
-                    transazioni.push_back(t);
-                } else if (tipo == "Uscita") {
-                    Transaction_out *t = new Transaction_out(importo, descrizione);
-                    transazioni.push_back(t);
+                getline(cin, description);
+                if (type == "Entrata") {
+                    Transaction_in *t = new Transaction_in(amount, description);
+                    transactions.push_back(t);
+                } else if (type == "Uscita") {
+                    Transaction_out *t = new Transaction_out(amount, description);
+                    transactions.push_back(t);
                 } else {
                     cout << "Tipo di transazione non valido" << endl;
                 }
@@ -67,17 +67,17 @@ int main() {
                 int index;
                 cout << "Indice della transazione da modificare: ";
                 cin >> index;
-                if (index >= 0 && index < transazioni.size()) {
-                    float importo;
+                if (index >= 0 && index < transactions.size()) {
+                    float amount;
                     cout << "Nuovo importo: ";
-                    cin >> importo;
-                    string descrizione;
+                    cin >> amount;
+                    string description;
                     cout << "Nuova descrizione: ";
                     cin.ignore();
-                    getline(cin, descrizione);
-                    Transaction *t = transazioni[index];
-                    t->m_money = importo;
-                    t->m_description = descrizione;
+                    getline(cin, description);
+                    Transaction *t = transactions[index];
+                    t->m_money = amount;
+                    t->m_description = description;
                     cout << "Transazione modificata" << endl;
                 } else {
                     cout << "Indice non valido" << endl;
@@ -88,9 +88,9 @@ int main() {
                 int index;
                 cout << "Indice della transazione da eliminare: ";
                 cin >> index;
-                if (index >= 0 && index < transazioni.size()) {
-                    Transaction *t = transazioni[index];
-                    transazioni.erase(transazioni.begin() + index);
+                if (index >= 0 && index < transactions.size()) {
+                    Transaction *t = transactions[index];
+                    transactions.erase(transactions.begin() + index);
                     delete t;
                     cout << "Transazione eliminata" << endl;
                 } else {
@@ -101,7 +101,7 @@ int main() {
             case 4:
                 // Visualizza le transazioni
                 std::cout << "Transazioni:" << std::endl;
-                for (auto &t: transazioni) {
+                for (auto &t: transactions) {
                     std::cout << t->getType() << " di " << t->getAmount() << " euro (" << t->getDescription() << ")"
                               << std::endl;
                 }
@@ -116,9 +116,9 @@ int main() {
     } while (scelta != 0);
 
 // Salva le transazioni sul file di output
-    ofstream outFile("transazioni_output.txt");
+    ofstream outFile("transazioni.txt");
     if (outFile.is_open()) {
-        for (auto &t: transazioni) {
+        for (auto &t: transactions) {
             t->save(outFile);
             outFile << std::endl;
         }
@@ -129,7 +129,7 @@ int main() {
     }
 
 // Deallocazione della memoria
-    for (auto &t: transazioni) {
+    for (auto &t: transactions) {
         delete t;
     }
     return 0;
