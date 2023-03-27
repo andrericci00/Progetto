@@ -24,7 +24,10 @@ float BankAccount::getBalance() const {
     }
     return balance;
 }
-
+void BankAccount::deposit(float amount) {
+    Transaction* transaction = new Transaction(amount,"Deposito");
+            addTransaction(transaction);
+}
 std::vector<Transaction*> BankAccount::getTransactions() const {
     return m_transactions;
 }

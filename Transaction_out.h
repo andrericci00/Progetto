@@ -11,12 +11,26 @@
 class Transaction_out : public Transaction {
 public:
     Transaction_out();
-    Transaction_out(float amount, const string& description);
+    Transaction_out(float amount, const string& description) : Transaction(amount,description){}
 
-    virtual string getType() const override;
+    virtual string getType() const override {
+        return "Uscita";
+    }
 
-    virtual void save(ofstream& file) const override;
-    virtual void load(ifstream& file) override;
+    void save(ofstream& file) const override {
+        file << getType() << endl;
+        file << getAmount() << endl;
+        file << getDescription() << endl;
+    }
+    void load(ifstream& file) override {
+        string type, description;
+        float amount;
+        getline(file,type);
+        file >> amount;
+        file.ignore();
+        getline(file,description);
+        *this = Transaction_out(amount,description);
+    }
 
     float m_money;
 };
