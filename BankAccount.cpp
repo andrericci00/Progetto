@@ -3,6 +3,7 @@
 //
 
 #include "BankAccount.h"
+#include "Transaction_in.h"
 
 BankAccount::BankAccount(const std::string& owner) : m_owner(owner) {}
 
@@ -25,8 +26,8 @@ float BankAccount::getBalance() const {
     return balance;
 }
 void BankAccount::deposit(float amount) {
-    Transaction* transaction = new Transaction(amount,"Deposito");
-            addTransaction(transaction);
+    Transaction* transaction = new Transaction_in(amount, "Deposito");
+    addTransaction(transaction);
 }
 std::vector<Transaction*> BankAccount::getTransactions() const {
     return m_transactions;

@@ -5,33 +5,19 @@
 #ifndef LABORATORIO_TRANSACTION_OUT_H
 #define LABORATORIO_TRANSACTION_OUT_H
 
-
 #include "Transaction.h"
 
 class Transaction_out : public Transaction {
 public:
     Transaction_out();
-    Transaction_out(float amount, const string& description) : Transaction(amount,description){}
+    Transaction_out(float amount, const string& description);
 
-    virtual string getType() const override {
-        return "Uscita";
-    }
+    virtual string getType() const override;
 
-    void save(ofstream& file) const override {
-        file << getType() << endl;
-        file << getAmount() << endl;
-        file << getDescription() << endl;
-    }
-    void load(ifstream& file) override {
-        string type, description;
-        float amount;
-        getline(file,type);
-        file >> amount;
-        file.ignore();
-        getline(file,description);
-        *this = Transaction_out(amount,description);
-    }
+    void save(ofstream& file) const override;
+    void load(ifstream& file) override;
 
+private:
     float m_money;
 };
 

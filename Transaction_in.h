@@ -6,30 +6,19 @@
 #define LABORATORIO_TRANSACTION_IN_H
 #include "Transaction.h"
 
-class Transaction_in : public Transaction{
+
+class Transaction_in : public Transaction {
 public:
     Transaction_in();
-    Transaction_in(float amount, const string& description): Transaction(amount,description){}
+    Transaction_in(float amount, const string& description);
 
-    string getType() const override {
-        return "Entrata";
-    }
-    void save(ofstream& file) const override{
-        file << getType() << endl;
-        file << getAmount() << endl;
-        file << getDescription() << endl;
-    }
-    void load(ifstream& file) override {
-        string type, description;
-        float amount;
-        getline(file, type);
-        file >> amount;
-        file.ignore();
-        getline(file, description);
-        *this = Transaction_in(amount,description);
-    }
+    virtual string getType() const override;
 
+    void save(ofstream& file) const override;
+    void load(ifstream& file) override;
+
+private:
+    float m_money;
 };
-
 
 #endif //LABORATORIO_TRANSACTION_IN_H
