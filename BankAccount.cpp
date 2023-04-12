@@ -4,12 +4,14 @@
 
 #include "BankAccount.h"
 #include "Transaction_in.h"
+#include "Transaction_out.h"
 
 BankAccount::BankAccount(const std::string& owner) : m_owner(owner) {}
 
 void BankAccount::addTransaction(Transaction* transaction) {
     m_transactions.push_back(transaction);
 }
+
 
 void BankAccount::removeTransaction(int index) {
     if (index >= 0 && index < m_transactions.size()) {
@@ -18,12 +20,17 @@ void BankAccount::removeTransaction(int index) {
     }
 }
 
-float BankAccount::getBalance() const {
+float BankAccount::getBalance()  {
     float balance = 0.0f;
     for (auto& transaction : m_transactions) {
-        balance += transaction->getAmount();
+        if (transaction->getType() == "Entrata") {
+            balance += transaction->getAmount();
+        } else {
+            balance -= transaction->getAmount();
+        }
     }
     return balance;
+
 }
 void BankAccount::deposit(float amount) {
     Transaction* transaction = new Transaction_in(amount, "Deposito");

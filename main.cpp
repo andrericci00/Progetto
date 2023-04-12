@@ -5,9 +5,11 @@ using namespace std;
 #include "Transaction.h"
 #include "Transaction_in.h"
 #include "Transaction_out.h"
+#include "BankAccount.h"
 
 //esempio utilizzo classi
 int main() {
+    BankAccount bankaccount("Luca Rossi");
     std::vector<Transaction *> transactions;
     ifstream file("transazioni.txt");
     if (file.is_open()) {
@@ -30,17 +32,20 @@ int main() {
         return 1;
     }
 
-    int scelta;
+
+
+    int choice;
     do {
         cout << "1. Aggiungi transazione" << endl;
         cout << "2. Modifica transazione" << endl;
         cout << "3. Elimina transazione" << endl;
         cout << "4. Visualizza transazioni" << endl;
+        cout << "5. Visualizza saldo" << endl;
         cout << "0. Esci" << endl;
         cout << "Scelta: ";
-        cin >> scelta;
+        cin >> choice;
 
-        switch (scelta) {
+        switch (choice) {
             case 1: {
                 string type;
                 cout << "Tipo di transazione (Entrata/Uscita): ";
@@ -55,6 +60,7 @@ int main() {
                 if (type == "Entrata") {
                     Transaction_in *t = new Transaction_in(amount, description);
                     transactions.push_back(t);
+                    bankaccount.deposit(amount);
                 } else if (type == "Uscita") {
                     Transaction_out *t = new Transaction_out(amount, description);
                     transactions.push_back(t);
@@ -106,6 +112,10 @@ int main() {
                               << std::endl;
                 }
                 break;
+            case 5: {
+                cout << "Saldo: " << bankaccount.getBalance() << endl;
+                break;
+            }
             case 0:
                 std::cout << "Uscita dal programma" << std::endl;
                 break;
@@ -113,7 +123,7 @@ int main() {
                 std::cout << "Scelta non valida" << std::endl;
                 break;
         }
-    } while (scelta != 0);
+    } while (choice != 0);
 
 // Salva le transazioni sul file di output
     ofstream outFile("transazioni.txt");
