@@ -18,6 +18,7 @@ public:
     void removeTransaction(int index);
     float getBalance() ;
     void deposit(float amount);
+    void prelievo(float amount);
     std::vector<Transaction*> getTransactions() const;
 
 private:

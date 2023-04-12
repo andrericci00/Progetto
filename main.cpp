@@ -64,6 +64,7 @@ int main() {
                 } else if (type == "Uscita") {
                     Transaction_out *t = new Transaction_out(amount, description);
                     transactions.push_back(t);
+                    bankaccount.prelievo(amount);
                 } else {
                     cout << "Tipo di transazione non valido" << endl;
                 }

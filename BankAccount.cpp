@@ -36,6 +36,11 @@ void BankAccount::deposit(float amount) {
     Transaction* transaction = new Transaction_in(amount, "Deposito");
     addTransaction(transaction);
 }
+void BankAccount::prelievo(float amount) {
+    Transaction* transaction = new Transaction_out(amount, "Prelievo");
+    addTransaction(transaction);
+}
+
 std::vector<Transaction*> BankAccount::getTransactions() const {
     return m_transactions;
 }
