@@ -3,14 +3,13 @@
 //
 
 #include "Transaction.h"
-#include <iostream>
-Transaction::Transaction(): m_money(0) , m_description("") {}
-Transaction::Transaction(float amount, const string& description) : m_money(amount), m_description(description) {}
-
-float Transaction::getAmount() const {
-    return m_money;
+Transaction::Transaction(float amount, transactionType type1, string description) {
+    this->amount=amount;
+    this->type=type1;
+    this->description=description;
 }
 
-string Transaction::getDescription() const {
-    return m_description;
+void Transaction::Modify(float num,string desc) {
+    amount=num;
+    description=desc;
 }

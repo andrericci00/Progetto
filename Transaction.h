@@ -2,27 +2,26 @@
 // Created by 182913 on 06/03/2023.
 //
 
-#ifndef LABORATORIO_TRANSACTION_H
-#define LABORATORIO_TRANSACTION_H
-#include <fstream>
 #include <string>
+
+#ifndef TRANSAZIONI_TRANSACTION_H
+#define TRANSAZIONI_TRANSACTION_H
+enum transactionType{
+    Entrata,
+    Uscita
+};
+
 using namespace std;
 
 class Transaction {
 public:
-    Transaction();
-    Transaction(float amount, const string& description);
 
-    float getAmount() const;
-    string getDescription() const;
-    virtual string getType() const=0;
-    virtual void save(ofstream& file) const=0;
-    virtual void load(ifstream& file)=0;
-
-    float m_money;
-    string m_description;
-
+    float amount;
+    transactionType type;
+    string description;
+    Transaction(float amount, transactionType type1, string description);
+    void Modify(float num,string desc);
 };
 
 
-#endif //LABORATORIO_TRANSACTION_H
+#endif //TRANSAZIONI_TRANSACTION_H
