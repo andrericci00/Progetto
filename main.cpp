@@ -3,8 +3,7 @@ using namespace std;
 #include <fstream>
 #include <vector>
 #include "Transaction.h"
-#include "Transaction_in.h"
-#include "Transaction_out.h"
+
 #include "BankAccount.h"
 
 //esempio utilizzo classi

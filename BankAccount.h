@@ -2,28 +2,24 @@
 // Created by 182913 on 27/03/2023.
 //
 
-#ifndef LABORATORIO_BANKACCOUNT_H
-#define LABORATORIO_BANKACCOUNT_H
-
-
 #include <string>
 #include <vector>
-#include "Transaction.h"
+#include "Transaction.h";
+#ifndef TRANSAZIONI_ACCOUNT_H
+#define TRANSAZIONI_ACCOUNT_H
+using namespace std;
 
 class BankAccount {
+
 public:
-    BankAccount(const std::string& owner);
+    float balance;
+    string name;
+    vector<Transaction*> transactions;
+    float GetBalance();
+    void MakeTransaction(float amount, transactionType type, string desc);
+    void Deposit(float amount);
+    void Withdrawing(float amount);
 
-    void addTransaction(Transaction* transaction);
-    void removeTransaction(int index);
-    float getBalance() ;
-    void deposit(float amount);
-    void prelievo(float amount);
-    std::vector<Transaction*> getTransactions() const;
-
-private:
-    std::string m_owner;
-    std::vector<Transaction*> m_transactions;
 };
 
-#endif //LABORATORIO_BANKACCOUNT_H
+#endif //TRANSAZIONI_ACCOUNT_H
