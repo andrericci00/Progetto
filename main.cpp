@@ -15,7 +15,7 @@ int main() {
     BankAccount *bankAccount = new BankAccount();
     int input;
     int value;
-    transactionType type;
+    string description;
     int intero_tipo;
     int transactionIndex;
     string saveData;
@@ -71,11 +71,13 @@ int main() {
                 cin >> value;
                 cout << "Se in Entrata digita 0 se in Uscita digita 1"<<endl;
                 cin >> intero_tipo;
+                cout <<"Aggiungi una descrizione alla transazione" <<endl;
+                cin >> description;
                 if (intero_tipo==0) {
-                    bankAccount->MakeTransaction(value, transactionType::Entrata, "ciao");
+                    bankAccount->MakeTransaction(value, transactionType::Entrata, description);
                 }
                 else if(intero_tipo==1){
-                    bankAccount->MakeTransaction(value, transactionType::Uscita, "ciao");
+                    bankAccount->MakeTransaction(value, transactionType::Uscita, description);
                 }
                 else {
                     cout << "Digita un valore corretto" << endl;
