@@ -9,9 +9,14 @@
 
 using namespace std;
 
+
+
 int main() {
     BankAccount *bankAccount = new BankAccount();
     int input;
+    int value;
+    transactionType type;
+    int intero_tipo;
     int transactionIndex;
     string saveData;
     const char *path = R"(C:\Users\182913\CLionProjects\Laboratorio\file.txt)";
@@ -51,14 +56,30 @@ int main() {
 // in base ad input, scegliamo cosa fare, il programma viene eseguito fintanto che non si sceglie 0, il caso default viene usato se un numero e errato
         switch (input) {
             case 1:
-                bankAccount->Deposit(23.94212);
+                cout << "Inserisci l'importo che desideri depositare" <<endl;
+                cin >> value;
+                bankAccount->Deposit(value);
                 break;
             case 2:
-                bankAccount->Withdrawing(200);
+                cout << "Inserisci l'importo che desideri prelevare" <<endl;
+                cin >> value;
+
+                bankAccount->Withdrawing(value);
                 break;
             case 3:
-
-                bankAccount->MakeTransaction(32.852365454, transactionType::Entrata, "ciao");
+                cout << "Inserisci l'importo della transazione" <<endl;
+                cin >> value;
+                cout << "Se in Entrata digita 0 se in Uscita digita 1"<<endl;
+                cin >> intero_tipo;
+                if (intero_tipo==0) {
+                    bankAccount->MakeTransaction(value, transactionType::Entrata, "ciao");
+                }
+                else if(intero_tipo==1){
+                    bankAccount->MakeTransaction(value, transactionType::Uscita, "ciao");
+                }
+                else {
+                    cout << "Digita un valore corretto" << endl;
+                }
                 break;
             case 4:
                 std::cout << " \n il tuo bilancio e: " << bankAccount->GetBalance() << endl;
