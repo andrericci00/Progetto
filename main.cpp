@@ -7,9 +7,9 @@
 #include <iomanip>
 #include <algorithm>
 
+
 using namespace std;
-
-
+const string my_string="Cosa desideri fare? 1 per Deposito, 2 per Prelievo, 3 per fare una transazione, 4 per vedere il bilancio, 5 per modificare una transazione 0 per uscire";
 
 int main() {
     BankAccount *bankAccount = new BankAccount();
@@ -22,6 +22,7 @@ int main() {
     const char *path = R"(C:\Users\182913\CLionProjects\Laboratorio\file.txt)";
     ifstream file1(path);
     vector<string> datas;
+
 
     if (file1.good()) {
         string line;
@@ -43,43 +44,42 @@ int main() {
     std::ofstream file(path);
     do {
         cout
-                << "Cosa desideri fare? 1 per Deposito, 2 per Prelievo, 3 per fare una transazione, 4 per vedere il bilancio, 5 per modificare una transazione 0 per uscire"
-                << endl;
+                << my_string << endl;
         // come gestire un input sbagliato, while controlla che cin sia del tipo giusto a input
         while (!(cin >> input)) {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout
-                    << "Cosa desideri fare? 1 per Deposito, 2 per Prelievo, 3 per fare una transazione, 4 per vedere il bilancio, 5 per modificare transazione, 0 per uscire"
-                    << endl;
+            cout << "Input non valido. Inserisci nuovamente: ";
         }
+
+        cout
+                << my_string << endl;
+
 // in base ad input, scegliamo cosa fare, il programma viene eseguito fintanto che non si sceglie 0, il caso default viene usato se un numero e errato
         switch (input) {
             case 1:
-                cout << "Inserisci l'importo che desideri depositare" <<endl;
+                cout << "Inserisci l'importo che desideri depositare" << endl;
                 cin >> value;
                 bankAccount->Deposit(value);
                 break;
             case 2:
-                cout << "Inserisci l'importo che desideri prelevare" <<endl;
+                cout << "Inserisci l'importo che desideri prelevare" << endl;
                 cin >> value;
 
                 bankAccount->Withdrawing(value);
                 break;
             case 3:
-                cout << "Inserisci l'importo della transazione" <<endl;
+                cout << "Inserisci l'importo della transazione" << endl;
                 cin >> value;
-                cout << "Se in Entrata digita 0 se in Uscita digita 1"<<endl;
+                cout << "Se in Entrata digita 0 se in Uscita digita 1" << endl;
                 cin >> intero_tipo;
-                cout <<"Aggiungi una descrizione alla transazione" <<endl;
+                cout << "Aggiungi una descrizione alla transazione" << endl;
                 cin >> description;
-                if (intero_tipo==0) {
+                if (intero_tipo == 0) {
                     bankAccount->MakeTransaction(value, transactionType::Entrata, description);
-                }
-                else if(intero_tipo==1){
+                } else if (intero_tipo == 1) {
                     bankAccount->MakeTransaction(value, transactionType::Uscita, description);
-                }
-                else {
+                } else {
                     cout << "Digita un valore corretto" << endl;
                 }
                 break;
@@ -93,10 +93,12 @@ int main() {
                 while (!(cin >> transactionIndex)) {
                     cin.clear();
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                    cout
-                            << "Seleziona l'indice della transazione"
-                            << endl;
+                    cout << "Input non valido. Inserisci nuovamente: ";
                 }
+
+                cout
+                        << "Seleziona l'indice della transazione"
+                        << endl;
                 if (transactionIndex >= 0 && transactionIndex < bankAccount->transactions.size()) {
                     int newamount;
                     string newDesc;
@@ -146,5 +148,7 @@ int main() {
                 cout << "hai inserito un numero sbagliato " << endl;
                 break;
         }
-    } while (input != 0);
-}
+
+        }
+        while (input != 0);
+    }
