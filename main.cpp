@@ -1,146 +1,127 @@
-using namespace std;
 #include <iostream>
-#include <fstream>
-#include <vector>
-#include "Transaction.h"
-
+#include <string>
 #include "BankAccount.h"
+#include <limits>
+#include <fstream>
+#include <sstream>
+#include <iomanip>
+#include <algorithm>
 
-//esempio utilizzo classi
+using namespace std;
+
 int main() {
-    BankAccount bankaccount("Luca Rossi");
-    std::vector<Transaction *> transactions;
-    ifstream file("transazioni.txt");
-    if (file.is_open()) {
-        while (!file.eof()) {
-            string type;
-            getline(file, type);
-            if (type == "Entrata") {
-                Transaction_in *t = new Transaction_in();
-                t->load(file);
-                transactions.push_back(t);
-            } else if (type == "Uscita") {
-                Transaction_out *t = new Transaction_out();
-                t->load(file);
-                transactions.push_back(t);
+    BankAccount *bankAccount = new BankAccount();
+    int input;
+    int transactionIndex;
+    string saveData;
+    const char *path = R"(C:\Users\182913\CLionProjects\Laboratorio\file.txt)";
+    ifstream file1(path);
+    vector<string> datas;
+
+    if (file1.good()) {
+        string line;
+
+        while (std::getline(file1, line)) {
+            //controllo della linea
+            datas.push_back(line);
+        }
+        file1.close();
+
+        for (int i = 0; i < datas.size(); i += 3) {
+            if (datas[i + 1] == "Entrata") {
+                bankAccount->MakeTransaction(stoi(datas[i]), transactionType::Entrata, datas[i + 2]);
+            } else {
+                bankAccount->MakeTransaction(stoi(datas[i]), transactionType::Uscita, datas[i + 2]);
             }
         }
-        file.close();
-    } else {
-        cerr << "Errore durante l'apertura del file di input" << endl;
-        return 1;
     }
-
-
-
-    int choice;
+    std::ofstream file(path);
     do {
-        cout << "1. Aggiungi transazione" << endl;
-        cout << "2. Modifica transazione" << endl;
-        cout << "3. Elimina transazione" << endl;
-        cout << "4. Visualizza transazioni" << endl;
-        cout << "5. Visualizza saldo" << endl;
-        cout << "0. Esci" << endl;
-        cout << "Scelta: ";
-        cin >> choice;
+        cout
+                << "Cosa desideri fare? 1 per Deposito, 2 per Prelievo, 3 per fare una transazione, 4 per vedere il bilancio, 5 per modificare una transazione 0 per uscire"
+                << endl;
+        // come gestire un input sbagliato, while controlla che cin sia del tipo giusto a input
+        while (!(cin >> input)) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout
+                    << "Cosa desideri fare? 1 per Deposito, 2 per Prelievo, 3 per fare una transazione, 4 per vedere il bilancio, 5 per modificare transazione, 0 per uscire"
+                    << endl;
+        }
+// in base ad input, scegliamo cosa fare, il programma viene eseguito fintanto che non si sceglie 0, il caso default viene usato se un numero e errato
+        switch (input) {
+            case 1:
+                bankAccount->Deposit(23.94212);
+                break;
+            case 2:
+                bankAccount->Withdrawing(200);
+                break;
+            case 3:
 
-        switch (choice) {
-            case 1: {
-                string type;
-                cout << "Tipo di transazione (Entrata/Uscita): ";
-                cin >> type;
-                float amount;
-                cout << "Importo: ";
-                cin >> amount;
-                string description;
-                cout << "Descrizione: ";
-                cin.ignore();
-                getline(cin, description);
-                if (type == "Entrata") {
-                    Transaction_in *t = new Transaction_in(amount, description);
-                    transactions.push_back(t);
-                    bankaccount.deposit(amount);
-                } else if (type == "Uscita") {
-                    Transaction_out *t = new Transaction_out(amount, description);
-                    transactions.push_back(t);
-                    bankaccount.prelievo(amount);
-                } else {
-                    cout << "Tipo di transazione non valido" << endl;
-                }
+                bankAccount->MakeTransaction(32.852365454, transactionType::Entrata, "ciao");
                 break;
-            }
-            case 2: {
-                int index;
-                cout << "Indice della transazione da modificare: ";
-                cin >> index;
-                if (index >= 0 && index < transactions.size()) {
-                    float amount;
-                    cout << "Nuovo importo: ";
-                    cin >> amount;
-                    string description;
-                    cout << "Nuova descrizione: ";
-                    cin.ignore();
-                    getline(cin, description);
-                    Transaction *t = transactions[index];
-                    t->m_money = amount;
-                    t->m_description = description;
-                    cout << "Transazione modificata" << endl;
-                } else {
-                    cout << "Indice non valido" << endl;
-                }
-                break;
-            }
-            case 3: {
-                int index;
-                cout << "Indice della transazione da eliminare: ";
-                cin >> index;
-                if (index >= 0 && index < transactions.size()) {
-                    Transaction *t = transactions[index];
-                    transactions.erase(transactions.begin() + index);
-                    delete t;
-                    cout << "Transazione eliminata" << endl;
-                } else {
-                    cout << "Indice non valido" << endl;
-                }
-                break;
-            }
             case 4:
-                // Visualizza le transazioni
-                std::cout << "Transazioni:" << std::endl;
-                for (auto &t: transactions) {
-                    std::cout << t->getType() << " di " << t->getAmount() << " euro (" << t->getDescription() << ")"
-                              << std::endl;
+                std::cout << " \n il tuo bilancio e: " << bankAccount->GetBalance() << endl;
+                break;
+            case 5:
+                cout
+                        << "Seleziona l'indice della transazione"
+                        << endl;
+                while (!(cin >> transactionIndex)) {
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cout
+                            << "Seleziona l'indice della transazione"
+                            << endl;
+                }
+                if (transactionIndex >= 0 && transactionIndex < bankAccount->transactions.size()) {
+                    int newamount;
+                    string newDesc;
+                    cout
+                            << "Seleziona l'importo"
+                            << endl;
+                    while (!(cin >> newamount)) {
+                        cin.clear();
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        cout
+                                << "Seleziona l'importo"
+                                << endl;
+                    }
+                    cout << "scrivi la nuova descrizione" << endl;
+                    cin >> newDesc;
+                    bankAccount->transactions[transactionIndex]->Modify(newamount, newDesc);
+
+                } else {
+                    cout << "Indice errato" << endl;
                 }
                 break;
-            case 5: {
-                cout << "Saldo: " << bankaccount.getBalance() << endl;
-                break;
-            }
+                // avviene il salvataggio
             case 0:
-                std::cout << "Uscita dal programma" << std::endl;
+                for (int i = 0; i < bankAccount->transactions.size(); i++) {
+                    ostringstream stream;
+                    stream << fixed << setprecision(2) << bankAccount->transactions[i]->amount;
+                    string str = stream.str();
+                    replace(str.begin(), str.end(), '.', ',');
+                    saveData += str + "\n";
+                    switch (bankAccount->transactions[i]->type) {
+
+                        case Entrata:
+                            saveData += "Entrata\n";
+                            break;
+                        case Uscita:
+                            saveData += "Uscita\n";
+                            break;
+                    }
+                    saveData += bankAccount->transactions[i]->description + "\n";
+                }
+
+                file << saveData;
+                file.close();
                 break;
+
             default:
-                std::cout << "Scelta non valida" << std::endl;
+                cout << "hai inserito un numero sbagliato " << endl;
                 break;
         }
-    } while (choice != 0);
-
-// Salva le transazioni sul file di output
-    ofstream outFile("transazioni.txt");
-    if (outFile.is_open()) {
-        for (auto &t: transactions) {
-            t->save(outFile);
-            outFile << std::endl;
-        }
-        outFile.close();
-    } else {
-        std::cerr << "Errore durante l'apertura del file di output" << std::endl;
-        return 1;
-    }
-
-// Deallocazione della memoria
-    for (auto &t: transactions) {
-        delete t;
-    }
-    return 0;
+    } while (input != 0);
 }
