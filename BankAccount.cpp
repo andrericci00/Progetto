@@ -17,7 +17,6 @@ void BankAccount::Deposit(float amount) {
     balance+=amount;
     balance = std::round(balance*100)/100;
 }
-//spostare
 void BankAccount::MakeTransaction(float amount,transactionType type, string desc ) {
     Transaction* t= new Transaction(amount, type, desc);
     transactions.push_back(t);

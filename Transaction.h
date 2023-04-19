@@ -3,6 +3,7 @@
 //
 
 #include <string>
+#include <vector>
 
 #ifndef TRANSAZIONI_TRANSACTION_H
 #define TRANSAZIONI_TRANSACTION_H
@@ -15,7 +16,6 @@ using namespace std;
 
 class Transaction {
 public:
-
     float amount;
     transactionType type;
     string description;
