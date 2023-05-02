@@ -1,6 +1,0 @@
-3,00
-Uscita
-a
-100,00
-Entrata
-aaa
