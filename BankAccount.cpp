@@ -6,26 +6,38 @@
 
 
 float BankAccount::GetBalance() {
+    balance=0;
+    for(int i=0; i<transactions.size(); i++) {
+        if(transactions[i]->type==Entrata){
+            balance+=transactions[i]->amount;
+        }
+        else{
+            balance-=transactions[i]->amount;
+        }
+
+    }
     return balance;
 }
 
-void BankAccount::Withdrawing(float amount  ) {
-    balance-= amount;
-    balance = std::round(balance*100)/100;
+void BankAccount::Withdrawing(float amount, string desc ) {
+    Transaction* t= new Transaction(amount, transactionType::Uscita, desc);
+    transactions.push_back(t);
+    //balance-= amount;
+    //balance = std::round(balance*100)/100;
 }
-void BankAccount::Deposit(float amount) {
-    balance+=amount;
-    balance = std::round(balance*100)/100;
+void BankAccount::Deposit(float amount, string desc) {
+    Transaction* t= new Transaction(amount, transactionType::Entrata, desc);
+    transactions.push_back(t);
+    //balance+=amount;
+    //balance = std::round(balance*100)/100;
 }
 void BankAccount::MakeTransaction(float amount,transactionType type, string desc ) {
-    Transaction* t= new Transaction(amount, type, desc);
-    transactions.push_back(t);
     switch (type) {
         case Entrata:
-            BankAccount::Deposit(amount);
+            BankAccount::Deposit(amount,desc);
             break;
         case Uscita:
-            BankAccount::Withdrawing(amount);
+            BankAccount::Withdrawing(amount,desc);
             break;
     }
 }

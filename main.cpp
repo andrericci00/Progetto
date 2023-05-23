@@ -41,7 +41,10 @@ int main() {
             }
         }
     }
-    std::ofstream file(path);
+   std::ofstream file(path);
+
+
+
     do {
         cout
                 << my_string << endl;
@@ -60,13 +63,13 @@ int main() {
             case 1:
                 cout << "Inserisci l'importo che desideri depositare" << endl;
                 cin >> value;
-                bankAccount->Deposit(value);
+                bankAccount->Deposit(value,"Deposito");
                 break;
             case 2:
                 cout << "Inserisci l'importo che desideri prelevare" << endl;
                 cin >> value;
 
-                bankAccount->Withdrawing(value);
+                bankAccount->Withdrawing(value,"Prelievo");
                 break;
             case 3:
                 cout << "Inserisci l'importo della transazione" << endl;
