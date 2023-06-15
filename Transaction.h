@@ -4,6 +4,7 @@
 
 #include <string>
 #include <vector>
+#include <ctime>
 
 #ifndef TRANSAZIONI_TRANSACTION_H
 #define TRANSAZIONI_TRANSACTION_H
@@ -21,8 +22,8 @@ public:
     string description;
     Transaction(float amount, transactionType type1, string description);
     void Modify(float num,string desc);
-
-    const char *GetData();
+    time_t now = time(0);
+    string data = ctime(&now);
 };
 
 
