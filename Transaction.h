@@ -21,7 +21,10 @@ public:
     string description;
     Transaction(float amount, transactionType type1, string description);
     void Modify(float num,string desc);
+
+    const char *GetData();
 };
+
 
 
 #endif //TRANSAZIONI_TRANSACTION_H

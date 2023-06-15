@@ -13,3 +13,8 @@ void Transaction::Modify(float num,string desc) {
     amount=num;
     description=desc;
 }
+const char* Transaction::GetData(){
+    time_t now = time(0);
+    const char* data = ctime(&now);
+    return data;
+}

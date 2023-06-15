@@ -19,8 +19,6 @@ public:
     void MakeTransaction(float amount, transactionType type, string desc);
     void Deposit(float amount, string desc);
     void Withdrawing(float amount, string desc);
-
-
 };
 
 #endif //TRANSAZIONI_ACCOUNT_H

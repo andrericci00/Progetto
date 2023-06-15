@@ -140,7 +140,7 @@ int main() {
                             saveData += "Uscita\n";
                             break;
                     }
-                    saveData += bankAccount->transactions[i]->description + "\n";
+                    saveData += bankAccount->transactions[i]->description  + "   in data:" +bankAccount->transactions[i]->GetData();
                 }
 
                 file << saveData;
