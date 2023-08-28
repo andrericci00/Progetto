@@ -72,8 +72,13 @@ int main() {
                 bankAccount->Withdrawing(value,"Prelievo");
                 break;
             case 3:
-                cout << "Inserisci l'importo della transazione" << endl;
-                cin >> value;
+                 cout << "Inserisci l'importo della transazione" << endl;
+                 cin >> value;
+                if(value<0){
+                    printf("Inserire un valore positivo\n");
+                    break;
+                }
+
                 cout << "Se in Entrata digita 0 se in Uscita digita 1" << endl;
                 cin >> intero_tipo;
                 cout << "Aggiungi una descrizione alla transazione" << endl;

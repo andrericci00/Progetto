@@ -1,6 +1,0 @@
-10,00
-Entrata
-Deposito in data: Thu Jun 15 16:07:02 2023 in data: Thu Jun 15 16:07:06 2023
-20,00
-Uscita
-Prelievo in data: Thu Jun 15 16:07:09 2023
