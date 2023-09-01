@@ -132,7 +132,7 @@ int main() {
             case 0:
                 for (int i = 0; i < bankAccount->transactions.size(); i++) {
                     ostringstream stream;
-                    stream << fixed << setprecision(2) << bankAccount->transactions[i]->amount;
+                    stream << fixed << setprecision(2) << bankAccount->transactions[i]->getAmount();
                     string str = stream.str();
                     replace(str.begin(), str.end(), '.', ',');
                     saveData += str + "\n";
@@ -145,7 +145,7 @@ int main() {
                             saveData += "Uscita\n";
                             break;
                     }
-                    saveData += bankAccount->transactions[i]->description  + " in data: " +bankAccount->transactions[i]->data;
+                    saveData += bankAccount->transactions[i]->getDescription()  + " in data: " +bankAccount->transactions[i]->data;
                 }
 
                 file << saveData;

@@ -13,3 +13,18 @@ void Transaction::Modify(float num,string desc) {
     amount=num;
     description=desc;
 }
+
+void Transaction::setAmount(float amount) {
+    Transaction::amount = amount;
+}
+int Transaction::getAmount(){
+    return amount;
+}
+
+void Transaction::setDescription(string description) {
+    Transaction::description = description;
+}
+
+string Transaction::getDescription() {
+    return description;
+}

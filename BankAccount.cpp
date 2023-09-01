@@ -10,10 +10,10 @@ float BankAccount::GetBalance() {
     balance=0;
     for(int i=0; i<transactions.size(); i++) {
         if(transactions[i]->type==Entrata){
-            balance+=transactions[i]->amount;
+            balance+=transactions[i]->getAmount();
         }
         else{
-            balance-=transactions[i]->amount;
+            balance-=transactions[i]->getAmount();
         }
 
     }

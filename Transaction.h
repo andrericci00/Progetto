@@ -17,13 +17,21 @@ using namespace std;
 
 class Transaction {
 public:
-    float amount;
-    transactionType type;
-    string description;
     Transaction(float amount, transactionType type1, string description);
     void Modify(float num,string desc);
+    void setAmount(float amount);
     time_t now = time(0);
     string data = ctime(&now);
+    int getAmount();
+    transactionType type;
+    void setDescription(string description);
+    string getDescription();
+private:
+    float amount;
+    string description;
+
+
+
 };
 
 
