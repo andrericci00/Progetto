@@ -6,6 +6,32 @@
 
 TEST(BankAccount, BankAccountbalance) {
      BankAccount b;
-     b.balance=50;
-    ASSERT_EQ(b.GetBalance(),50);
+     ASSERT_EQ(b.GetBalance(),0);
 }
+
+TEST(MakeTransactionTest, balanceMakeTransaction) {
+    BankAccount b;
+    b.MakeTransaction(50,Entrata,"Entrata");
+    b.MakeTransaction(30,Uscita,"Uscita");
+    b.Deposit(40,"Deposito");
+    ASSERT_EQ(b.GetBalance(),60);
+
+}
+
+TEST(BankAccountTest, WithdrawMoreThanBalance) {
+    BankAccount account;
+    account.balance=100;
+
+    // Tentativo di prelevare un importo maggiore del saldo
+    ASSERT_THROW({
+                     account.Withdrawing(200.0, "Prelievo");
+                 },
+                 std::runtime_error);
+
+    // Verifica che il saldo sia rimasto invariato
+    EXPECT_DOUBLE_EQ(account.balance, 100.0);
+}
+
+
+
+

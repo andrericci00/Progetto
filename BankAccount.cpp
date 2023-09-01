@@ -2,6 +2,7 @@
 // Created by 182913 on 27/03/2023.
 //
 #include <cmath>
+#include <stdexcept>
 #include "BankAccount.h"
 
 
@@ -23,6 +24,9 @@ float BankAccount::GetBalance() {
 void BankAccount::Withdrawing(float amount, string desc ) {
     if(amount<0){
         printf("Inserisci un numero positivo\n");
+    }
+    if (amount > balance) {
+        throw std::runtime_error("Fondi insufficienti per il prelievo.");
     }
     else {
         Transaction *t = new Transaction(amount, transactionType::Uscita, desc);

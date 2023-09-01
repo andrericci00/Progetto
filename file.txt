@@ -1,0 +1,6 @@
+20
+Uscita
+Prelievo in data: Fri Sep 01 12:32:51 2023
+100
+Entrata
+diocane in data: Fri Sep 01 12:33:01 2023
