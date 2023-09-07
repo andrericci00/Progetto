@@ -10,7 +10,7 @@
 float BankAccount::GetBalance() {
     balance=0;
     for(int i=0; i<transactions.size(); i++) {
-        if(transactions[i]->type==Entrata){
+        if(transactions[i]->type==transactionType::Entrata){
             balance+=transactions[i]->getAmount();
         }
         else{
@@ -21,18 +21,17 @@ float BankAccount::GetBalance() {
     return balance;
 }
 
-void BankAccount::Withdrawing(float amount, string desc ) {
-    if(amount<0){
+void BankAccount::Withdrawing(float amount, string desc) {
+    if (amount < 0) {
         printf("Inserisci un numero positivo\n");
-    }
-    if (amount > balance) {
-        throw std::runtime_error("Fondi insufficienti per il prelievo.");
-    }
-    else {
+        // Aggiungi qui la gestione dell'errore se l'importo è negativo, ad esempio un'eccezione.
+    } else if (amount > balance) {
+        printf("Non hai abbastanza fondi");
+    } else {
         Transaction *t = new Transaction(amount, transactionType::Uscita, desc);
         transactions.push_back(t);
-        //balance-= amount;
-        //balance = std::round(balance*100)/100;
+        // Aggiorna il saldo dopo il prelievo
+        balance -= amount;
     }
 }
 void BankAccount::Deposit(float amount, string desc) {
@@ -49,10 +48,10 @@ void BankAccount::Deposit(float amount, string desc) {
 void BankAccount::MakeTransaction(float amount,transactionType type, string desc ) {
 
         switch (type) {
-            case Entrata:
+            case transactionType::Entrata:
                 BankAccount::Deposit(amount, desc);
                 break;
-            case Uscita:
+            case transactionType::Uscita:
                 BankAccount::Withdrawing(amount, desc);
                 break;
         }

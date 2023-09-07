@@ -23,7 +23,7 @@ void Transaction::Modify(float num,string desc) {
 void Transaction::setAmount(float amount) {
     Transaction::amount = amount;
 }
-int Transaction::getAmount(){
+int Transaction::getAmount() const {
     return amount;
 }
 
@@ -31,6 +31,6 @@ void Transaction::setDescription(string description) {
     Transaction::description = description;
 }
 
-string Transaction::getDescription() {
+string Transaction::getDescription() const {
     return description;
 }

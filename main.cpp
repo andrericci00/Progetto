@@ -138,10 +138,10 @@ int main() {
                     saveData += str + "\n";
                     switch (bankAccount->transactions[i]->type) {
 
-                        case Entrata:
+                        case transactionType::Entrata:
                             saveData += "Entrata\n";
                             break;
-                        case Uscita:
+                        case transactionType::Uscita:
                             saveData += "Uscita\n";
                             break;
                     }

@@ -8,7 +8,7 @@
 
 #ifndef TRANSAZIONI_TRANSACTION_H
 #define TRANSAZIONI_TRANSACTION_H
-enum transactionType{
+enum class transactionType{
     Entrata,
     Uscita
 };
@@ -22,10 +22,10 @@ public:
     void setAmount(float amount);
     time_t now = time(0);
     string data = ctime(&now);
-    int getAmount();
+    int getAmount() const;
     transactionType type;
     void setDescription(string description);
-    string getDescription();
+    string getDescription() const;
 private:
     float amount;
     string description;

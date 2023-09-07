@@ -11,8 +11,8 @@ TEST(BankAccount, BankAccountbalance) {
 
 TEST(MakeTransactionTest, balanceMakeTransaction) {
     BankAccount b;
-    b.MakeTransaction(50,Entrata,"Entrata");
-    b.MakeTransaction(30,Uscita,"Uscita");
+    b.MakeTransaction(50,transactionType::Entrata,"Entrata");
+    b.MakeTransaction(30,transactionType::Uscita,"Uscita");
     b.Deposit(40,"Deposito");
     ASSERT_EQ(b.GetBalance(),60);
 
