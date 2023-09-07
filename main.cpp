@@ -107,7 +107,7 @@ int main() {
                 cout
                         << "Seleziona l'indice della transazione"
                         << endl;
-                if (transactionIndex >= 0 && transactionIndex < bankAccount->transactions.size()) {
+                if (transactionIndex >= 0 && transactionIndex < bankAccount->GetTransactions().size()) {
                     int newamount;
                     string newDesc;
                     cout
@@ -122,7 +122,7 @@ int main() {
                     }
                     cout << "scrivi la nuova descrizione" << endl;
                     cin >> newDesc;
-                    bankAccount->transactions[transactionIndex]->Modify(newamount, newDesc);
+                    bankAccount->GetTransactions()[transactionIndex]->Modify(newamount, newDesc);
 
                 } else {
                     cout << "Indice errato" << endl;
@@ -130,13 +130,13 @@ int main() {
                 break;
                 // avviene il salvataggio
             case 0:
-                for (int i = 0; i < bankAccount->transactions.size(); i++) {
+                for (int i = 0; i < bankAccount->GetTransactions().size(); i++) {
                     ostringstream stream;
-                    stream << fixed << setprecision(2) << bankAccount->transactions[i]->getAmount();
+                    stream << fixed << setprecision(2) << bankAccount->GetTransactions()[i]->getAmount();
                     string str = stream.str();
                     replace(str.begin(), str.end(), '.', ',');
                     saveData += str + "\n";
-                    switch (bankAccount->transactions[i]->type) {
+                    switch (bankAccount->GetTransactions()[i]->type) {
 
                         case transactionType::Entrata:
                             saveData += "Entrata\n";
@@ -145,7 +145,7 @@ int main() {
                             saveData += "Uscita\n";
                             break;
                     }
-                    saveData += bankAccount->transactions[i]->getDescription()  + " in data: " +bankAccount->transactions[i]->data;
+                    saveData += bankAccount->GetTransactions()[i]->getDescription()  + " in data: " +bankAccount->GetTransactions()[i]->data;
                 }
 
                 file << saveData;

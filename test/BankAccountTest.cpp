@@ -20,7 +20,7 @@ TEST(MakeTransactionTest, balanceMakeTransaction) {
 
 TEST(BankAccountTest, WithdrawMoreThanBalance) {
     BankAccount account;
-    account.balance=100;
+    account.SetBalance(100);
 
     // Tentativo di prelevare un importo maggiore del saldo
     ASSERT_THROW({
@@ -29,7 +29,7 @@ TEST(BankAccountTest, WithdrawMoreThanBalance) {
                  std::runtime_error);
 
     // Verifica che il saldo sia rimasto invariato
-    EXPECT_DOUBLE_EQ(account.balance, 100.0);
+    EXPECT_DOUBLE_EQ(account.GetBalance(), 100.0);
 }
 
 

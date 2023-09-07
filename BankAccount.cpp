@@ -8,25 +8,26 @@
 
 
 float BankAccount::GetBalance() {
-    balance=0;
-    for(int i=0; i<transactions.size(); i++) {
-        if(transactions[i]->type==transactionType::Entrata){
-            balance+=transactions[i]->getAmount();
+    for(int i = 0; i < transactions.size(); i++) {
+        if(transactions[i]->type == transactionType::Entrata){
+            balance += transactions[i]->getAmount();
+        } else {
+            balance -= transactions[i]->getAmount();
         }
-        else{
-            balance-=transactions[i]->getAmount();
-        }
-
     }
     return balance;
 }
 
+
+void BankAccount::SetBalance(float newBalance) {
+    balance = newBalance;
+}
+
 void BankAccount::Withdrawing(float amount, string desc) {
     if (amount < 0) {
-        printf("Inserisci un numero positivo\n");
-        // Aggiungi qui la gestione dell'errore se l'importo è negativo, ad esempio un'eccezione.
+        throw std::runtime_error("Inserisci un numero positivo");
     } else if (amount > balance) {
-        printf("Non hai abbastanza fondi");
+        throw std::runtime_error("Non hai abbastanza fondi");
     } else {
         Transaction *t = new Transaction(amount, transactionType::Uscita, desc);
         transactions.push_back(t);
@@ -56,4 +57,6 @@ void BankAccount::MakeTransaction(float amount,transactionType type, string desc
                 break;
         }
     }
-
+const vector<Transaction*>& BankAccount::GetTransactions() const {
+    return transactions;
+}
