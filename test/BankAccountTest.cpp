@@ -20,7 +20,7 @@ TEST(MakeTransactionTest, balanceMakeTransaction) {
 
 TEST(BankAccountTest, WithdrawMoreThanBalance) {
     BankAccount account;
-    account.SetBalance(100);
+    account.SetBalance(100.0);
 
     // Tentativo di prelevare un importo maggiore del saldo
     ASSERT_THROW({
