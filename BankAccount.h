@@ -12,13 +12,14 @@ using namespace std;
 class BankAccount {
 
 public:
-    float balance;
-    string name;
     vector<Transaction*> transactions;
     float GetBalance();
     void MakeTransaction(float amount, transactionType type, string desc);
     void Deposit(float amount, string desc);
     void Withdrawing(float amount, string desc);
+private:
+    float balance;
+    string name;
 };
 
 #endif //TRANSAZIONI_ACCOUNT_H
